@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stable Matching Practice</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Stable Matching: Gale-Shapley</h1>
+    <p class="subtitle">Walk through the algorithm by clicking the correct item in the tables.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>Preference Lists<span id="problem-label"></span></h2>
+      <h3>Hospitals</h3>
+      <table id="hospital-table"></table>
+      <h3>Students</h3>
+      <table id="student-table"></table>
+      <div id="yesno" class="hidden">
+        <span id="yesno-question"></span>
+        <button id="btn-yes">Yes</button>
+        <button id="btn-no">No</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Algorithm</h2>
+      <div id="pseudocode"></div>
+      <button id="btn-done">No hospital qualifies</button>
+      <button id="btn-reset">Reset</button>
+      <button id="btn-new">New problem</button>
+      <h2>Matching M</h2>
+      <div id="m-box"><span class="placeholder">M is empty</span></div>
+      <div id="log">Click a free hospital to begin.</div>
+    </section>
+  </main>
+
+  <section class="panel" id="quiz">
+    <h2>Which matching does this algorithm return?</h2>
+    <p class="locked-note">Finish the walkthrough to unlock the answer choices.</p>
+    <div id="quiz-options"></div>
+    <p id="quiz-feedback"></p>
+  </section>
+
+  <script src="data.js"></script>
+  <script src="engine.js"></script>
+  <script src="ui.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

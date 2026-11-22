@@ -1,0 +1,50 @@
+Gale-Shapley(preference lists for n hospitals and n students)
+    Let M be an empty matching
+    While some hospital h is unmatched and hasn’t proposed to every student:
+        Let s be the first student on h’s list to whom h has not yet proposed
+        If s is unmatched:
+            Add (h, s) to M
+        Else s is matched to h′:
+            If s prefers h to h′:
+                Remove (h′, s) from M
+                Add (h, s) to M
+            Else s prefers h′ to h:
+                Do nothing
+    Return M
+
+I'm building a plain HTML/CSS/JS study tool for my DSA midterm. No build step,
+no modules (plain <script> tags), opened directly from disk. Code is delivered
+in small pieces, one function or file at a time, because long replies get cut off.
+Each stage ends with browser tests I run before moving on.
+
+Sections (4 pages, landing page index.html built last):
+1. Stable Matching (DONE)
+2. Algorithm Analysis
+3. Recursion
+4. Backtracking + 1D Dynamic Programming
+
+Folder structure:
+project/
+  css/style.css            (shared styles)
+  stable-matching/
+    stable-matching.html
+    data.js    (PROBLEMS list: prefs + hand-verified quiz per problem)
+    engine.js  (algorithm logic only, no DOM)
+    ui.js      (rendering: tables, pseudocode, quiz)
+    game.js    (interaction state machine, clicks, feedback)
+
+Stable Matching tool design (pattern to reuse):
+- Preference tables on the left, pseudocode on the right with a red box on the
+  current line, M box showing the matching, and a log line for feedback.
+- The user advances by clicking the correct item in the table. Yes/No buttons
+  handle decisions. Wrong clicks show a short explanation of why.
+- Automatic steps animate with ~1s pauses. Clicks are blocked meanwhile.
+- A multiple-choice quiz unlocks at the end with distractors that teach a
+  specific mistake. Reset and "New problem" (cycles presets) buttons.
+- Click handlers are attached to the tables (event delegation) so they survive
+  re-rendering.
+
+Shared CSS classes I already have: .panel, .layout, .line.active (red box),
+.chip, .clickable, .hidden, .quiz-btn (.right/.wrong), #log.error.
+
+Next step: plan the Algorithm Analysis tool. Discuss the design first, no code yet.
