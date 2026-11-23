@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Recursion Trees</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="home-link" href="../index.html">← Home</a>
+  <h1>Recursion Trees</h1>
+
+  <div class="panel eq-bar">
+    <span id="eq"></span>
+    <span>
+      <button id="resetBtn">Reset</button>
+      <button id="newBtn">New problem</button>
+    </span>
+  </div>
+
+  <div class="panel">
+    <div class="level-head">
+      <span>Level ℓ</span><span>Nodes</span><span>Work at level ℓ</span>
+    </div>
+    <div id="tree">
+      <svg id="edges"></svg>
+      <div id="rows"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div id="prompt"></div>
+    <div id="choices"></div>
+    <div id="log"></div>
+  </div>
+
+  <div id="quiz" class="panel hidden"></div>
+
+  <script src="data.js"></script>
+  <script src="ui.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

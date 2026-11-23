@@ -50,3 +50,64 @@ tr.current td { background: #fff3c4; }
 
 #btn-new { margin-left: 0.5rem; margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
 #problem-label { font-size: 0.7em; font-weight: normal; color: #666; margin-left: 0.5rem; }
+
+/* ---- Recursion tree tool ---- */
+.eq-bar { display: flex; justify-content: space-between; align-items: center; font-size: 1.4em; }
+.eq-part { padding: 2px 4px; border: 2px solid transparent; border-radius: 4px; }
+.eq-part.active { border-color: #d00; }
+
+.level-head, .level-row {
+  display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(90px, 150px);
+  align-items: center; gap: 8px;
+}
+.level-head { font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+.level-row { min-height: 50px; padding: 14px 0; }
+.level-label { font-weight: bold; }
+
+#tree { position: relative; }
+#edges { position: absolute; inset: 0; width: 100%; height: 100%;
+         pointer-events: none; overflow: visible; }
+#rows { position: relative; }   /* paints nodes above the edges */
+
+.nodes { display: flex; justify-content: space-around; gap: 4px; }
+.nodes { min-width: 0; }
+.node { min-width: 44px; padding: 6px 8px; border: 2px solid #555; border-radius: 16px;
+        background: #fff; text-align: center; white-space: nowrap; }
+.node.empty { border-style: dashed; color: #999; }
+.node.target { border-color: #d00; }
+.node.compact { flex: 1; min-width: 0; padding: 3px 1px; font-size: 0.7em; border-radius: 8px; }
+.nodes.compact { gap: 2px; }   /* ui.js adds this class on the 16-node row */
+
+.level-total { padding: 6px; border: 2px dashed #999; border-radius: 6px; text-align: center; overflow-wrap: anywhere; }
+.level-total.filled { border-style: solid; border-color: #555; }
+.level-total.target { border-color: #d00; }
+
+/* Edges "draw" in. Each <line> needs pathLength="1" (ui.js sets it). */
+.edge { stroke: #555; stroke-width: 1.5; fill: none;
+        stroke-dasharray: 1; stroke-dashoffset: 1;
+        animation: draw-edge 0.6s ease-out forwards; }
+@keyframes draw-edge { to { stroke-dashoffset: 0; } }
+
+#prompt { font-weight: bold; margin-bottom: 8px; }
+#choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+
+/* Existing edges (redrawn on resize or re-render) appear instantly. */
+.edge.static { animation: none; stroke-dashoffset: 0; }
+
+.quiz-q { margin: 12px 0; }
+.quiz-text { font-weight: bold; margin-bottom: 6px; }
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-why { min-height: 1.2em; margin-top: 4px; }
+.quiz-why.error { color: #d00; }
+.quiz-btn:disabled { cursor: default; }
+.quiz-btn:disabled:not(.right) { opacity: 0.5; }
+
+.eq-bar { position: sticky; top: 0; z-index: 2; background: #fff; }
+
+/* ---- Landing page ---- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.card { display: block; color: inherit; text-decoration: none; }
+.card h2 { margin-top: 0; }
+.card:hover { outline: 2px solid #d00; }
+.card.disabled { opacity: 0.5; pointer-events: none; }
+.home-link { display: inline-block; margin-bottom: 8px; }
