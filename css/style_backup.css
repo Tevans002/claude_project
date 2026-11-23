@@ -1,0 +1,208 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 1rem 2rem; background: #f5f6f8; color: #222; }
+header h1 { margin-bottom: 0.2rem; }
+.subtitle { margin-top: 0; color: #555; }
+
+.layout { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.layout .panel { flex: 1; min-width: 340px; }
+.panel { background: #fff; border-radius: 8px; padding: 1rem 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.15); margin-bottom: 1.5rem; }
+
+table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
+th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: center; }
+th { background: #eef0f4; }
+.row-label { font-weight: bold; background: #f8f8fa; }
+.status { color: #666; font-size: 0.9em; }
+
+#pseudocode { font-family: "Courier New", monospace; font-size: 0.9em; margin-bottom: 1rem; }
+.line { padding: 0.2rem 0.5rem; border: 2px solid transparent; border-radius: 4px; }
+.line.active { border-color: #d62828; }
+
+#m-box { min-height: 3rem; border: 2px dashed #888; border-radius: 6px; padding: 0.6rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.placeholder { color: #999; font-style: italic; }
+#log { margin-top: 1rem; padding: 0.6rem; background: #eef6ff; border-radius: 6px; min-height: 1.5rem; }
+
+.locked-note { color: #777; font-style: italic; }
+#quiz-options { display: flex; flex-direction: column; gap: 0.5rem; max-width: 420px; }
+.quiz-btn { padding: 0.6rem; font-size: 1em; text-align: left; border: 1px solid #aaa; border-radius: 6px; background: #fff; }
+.quiz-btn:disabled { background: #eee; color: #888; }
+
+.row-label.clickable { cursor: pointer; }
+.row-label.clickable:hover { background: #dce8ff; }
+tr.current td { background: #fff3c4; }
+#log.error { background: #ffeaea; color: #8a1c1c; }
+
+.hidden { display: none; }
+#yesno { padding: 0.6rem; background: #fff8e1; border-radius: 6px; margin-top: 0.5rem; }
+#yesno button { margin-left: 0.5rem; padding: 0.3rem 1rem; font-size: 1em; cursor: pointer; }
+.pref-cell.clickable { cursor: pointer; }
+.pref-cell.clickable:hover { background: #dce8ff; }
+.pref-cell.proposing { background: #ffd966; font-weight: bold; }
+
+.chip { background: #d4edda; border: 1px solid #7bb68a; border-radius: 14px; padding: 0.25rem 0.7rem; font-weight: bold; }
+.pref-cell.proposed { color: #aaa; text-decoration: line-through; }
+
+#btn-done { margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
+
+#btn-reset { margin-left: 0.5rem; margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
+.quiz-btn:not(:disabled) { cursor: pointer; }
+.quiz-btn.right { background: #d4edda; border-color: #2e8b57; color: #1b5e20; }
+.quiz-btn.wrong { background: #ffeaea; border-color: #c0392b; color: #8a1c1c; }
+#quiz-feedback { max-width: 600px; min-height: 1.5rem; }
+
+#btn-new { margin-left: 0.5rem; margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
+#problem-label { font-size: 0.7em; font-weight: normal; color: #666; margin-left: 0.5rem; }
+
+/* ---- Recursion tree tool ---- */
+.eq-bar { display: flex; justify-content: space-between; align-items: center; font-size: 1.4em; }
+.eq-part { padding: 2px 4px; border: 2px solid transparent; border-radius: 4px; }
+.eq-part.active { border-color: #d00; }
+
+.level-head, .level-row {
+  display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(90px, 150px);
+  align-items: center; gap: 8px;
+}
+.level-head { font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+.level-row { min-height: 50px; padding: 14px 0; }
+.level-label { font-weight: bold; }
+
+#tree { position: relative; }
+#edges { position: absolute; inset: 0; width: 100%; height: 100%;
+         pointer-events: none; overflow: visible; }
+#rows { position: relative; }   /* paints nodes above the edges */
+
+.nodes { display: flex; justify-content: space-around; gap: 4px; }
+.nodes { min-width: 0; }
+.node { min-width: 44px; padding: 6px 8px; border: 2px solid #555; border-radius: 16px;
+        background: #fff; text-align: center; white-space: nowrap; }
+.node.empty { border-style: dashed; color: #999; }
+.node.target { border-color: #d00; }
+.node.compact { flex: 1; min-width: 0; padding: 3px 1px; font-size: 0.7em; border-radius: 8px; }
+.nodes.compact { gap: 2px; }   /* ui.js adds this class on the 16-node row */
+
+.level-total { padding: 6px; border: 2px dashed #999; border-radius: 6px; text-align: center; overflow-wrap: anywhere; }
+.level-total.filled { border-style: solid; border-color: #555; }
+.level-total.target { border-color: #d00; }
+
+/* Edges "draw" in. Each <line> needs pathLength="1" (ui.js sets it). */
+.edge { stroke: #555; stroke-width: 1.5; fill: none;
+        stroke-dasharray: 1; stroke-dashoffset: 1;
+        animation: draw-edge 0.6s ease-out forwards; }
+@keyframes draw-edge { to { stroke-dashoffset: 0; } }
+
+#prompt { font-weight: bold; margin-bottom: 8px; }
+#choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+
+/* Existing edges (redrawn on resize or re-render) appear instantly. */
+.edge.static { animation: none; stroke-dashoffset: 0; }
+
+.quiz-q { margin: 12px 0; }
+.quiz-text { font-weight: bold; margin-bottom: 6px; }
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-why { min-height: 1.2em; margin-top: 4px; }
+.quiz-why.error { color: #d00; }
+.quiz-btn:disabled { cursor: default; }
+.quiz-btn:disabled:not(.right) { opacity: 0.5; }
+
+.eq-bar { position: sticky; top: 0; z-index: 2; background: #fff; }
+
+/* ---- Landing page ---- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.card { display: block; color: inherit; text-decoration: none; }
+.card h2 { margin-top: 0; }
+.card:hover { outline: 2px solid #d00; }
+.card.disabled { opacity: 0.5; pointer-events: none; }
+.home-link { display: inline-block; margin-bottom: 8px; }
+
+/* ===== Tool 3: complexity (Euler diagram + reduction view) ===== */
+#euler { display: block; max-width: 640px; margin: 0 auto; }
+
+/* Regions (SVG ellipses/paths). Geometry is set by ui.js */
+.region {
+  fill-opacity: .18;
+  stroke-width: 2;
+  transition: rx .8s, ry .8s, cx .8s, cy .8s, transform .8s, fill-opacity .3s;
+}
+.region-p   { fill: #22c55e; stroke: #16a34a; }
+.region-np  { fill: #3b82f6; stroke: #2563eb; }
+.region-nph { fill: #f59e0b; stroke: #d97706; }
+.region-npc { fill: #a855f7; stroke: #7e22ce; fill-opacity: .35; }
+.region.active { stroke: #e11d48; stroke-width: 4; stroke-dasharray: 8 4; fill-opacity: .35; }
+.region.pulse  { animation: region-pulse 1s ease-in-out 2; }
+@keyframes region-pulse { 50% { fill-opacity: .55; } }
+
+.rlabel { font: 600 14px sans-serif; fill: #1f2937; pointer-events: none; }
+.rlabel.small { font-size: 11px; font-weight: 400; }
+
+/* Problem dots */
+.dot { r: 8; fill: #1f2937; stroke: #fff; stroke-width: 2; transition: fill .2s, stroke .2s; }
+.dot.clickable:hover { fill: #374151; stroke: #111827; }
+.dot.active { stroke: #e11d48; stroke-width: 4; }      /* red ring = hint */
+.dot.right  { fill: #16a34a; }
+.dot.wrong  { fill: #e11d48; }
+.dotlabel { font: 12px sans-serif; fill: #111827; pointer-events: none; }
+
+/* Reduction view: [A] ---> [B] with a travelling pulse */
+#reduce { padding: 8px 0; }
+.rrow { display: flex; align-items: center; gap: 12px; }
+.rcard {
+  flex: 0 0 auto; min-width: 120px; padding: 10px 12px;
+  border: 2px solid #9ca3af; border-radius: 8px; background: #fff; text-align: center;
+}
+.rcard  { flex: 0 1 150px; min-width: 0; overflow-wrap: anywhere; }
+.rcard small { display: block; color: #6b7280; }
+.rcard.hard { border-color: #d97706; background: #fffbeb; }   /* hardness lands here */
+.rcard.easy { border-color: #16a34a; background: #f0fdf4; }
+.rcard.clickable:hover { box-shadow: 0 0 0 3px #bfdbfe; }
+.rcard.active { outline: 3px solid #e11d48; outline-offset: 2px; }
+
+.rtrack { position: relative; flex: 1 1 auto; height: 28px; }
+.rtrack { flex: 1 1 80px; min-width: 80px; }
+.rtrack::before {                                   /* the arrow shaft */
+  content: ""; position: absolute; left: 0; right: 10px; top: 50%;
+  border-top: 3px solid #4b5563;
+}
+.rtrack::after {                                    /* the arrow head */
+  content: ""; position: absolute; right: 0; top: 50%; margin-top: -7px;
+  border-left: 12px solid #4b5563; border-top: 7px solid transparent; border-bottom: 7px solid transparent;
+}
+/* Arrow pointing B -> A, drawn explicitly (no mirroring) */
+.rtrack.rev::before { left: 10px; right: 0; }
+.rtrack.rev::after  { left: 0; right: auto; border-left: 0; border-right: 12px solid #4b5563; }
+.rtrack.rev .rpulse { left: auto; right: 0; }
+.rtrack.rev .rpulse.go        { animation: rpulse-go-rev 1.2s ease-in forwards; }
+.rtrack.rev .rpulse.blockedback { animation: rpulse-blockback-rev 1.2s ease-in forwards; }
+@keyframes rpulse-go-rev {
+  0%   { right: 0; opacity: 1; }
+  100% { right: calc(100% - 16px); opacity: 1; }
+}
+@keyframes rpulse-blockback-rev {
+  0%   { right: calc(100% - 16px); opacity: 1; }
+  60%  { right: 50%; opacity: 1; }
+  100% { right: 50%; opacity: 0; }
+}
+.rpulse {
+  position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin-top: -8px;
+  border-radius: 50%; background: #f59e0b; opacity: 0;
+}
+.rpulse.go      { animation: rpulse-go 1.2s ease-in forwards; }
+.rpulse.blocked { animation: rpulse-block 1.2s ease-in forwards; }
+@keyframes rpulse-go    { 0% { left: 0; opacity: 1; } 100% { left: calc(100% - 16px); opacity: 1; } }
+@keyframes rpulse-block { 0% { left: 0; opacity: 1; } 60% { left: 50%; opacity: 1; } 100% { left: 50%; opacity: 0; } }
+
+/* Tool 3: blocked pulse that starts at the arrowhead (hardness cannot flow backwards) */
+.rpulse.blockedback { animation: rpulse-blockback 1.2s ease-in forwards; }
+@keyframes rpulse-blockback {
+  0%   { left: calc(100% - 16px); opacity: 1; }
+  60%  { left: 50%; opacity: 1; }
+  100% { left: 50%; opacity: 0; }
+}
+
+/* Tool 3: statement banner (scoped to #statement, so the recursion tool is unaffected) */
+#statement {
+  max-width: 900px; margin: 8px auto 12px; padding: 10px 16px;
+  background: #f1f5f9; border: 1px solid #cbd5e1; border-left: 6px solid #2563eb;
+  border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+}
+#statement[data-world="eq"] { background: #fffbeb; border-color: #fcd34d; border-left-color: #d97706; }
+#statement > div:first-child { font-size: 13px; color: #475569; margin-bottom: 4px; }
+#statement > div:last-child  { font-size: 20px; line-height: 1.5; color: #111827; }
+#statement .eq-part { padding: 1px 5px; border-radius: 4px; font-weight: 600; }

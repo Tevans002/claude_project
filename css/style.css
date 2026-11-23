@@ -1,208 +1,330 @@
-body { font-family: Arial, sans-serif; margin: 0; padding: 1rem 2rem; background: #f5f6f8; color: #222; }
+/* =========================================================
+   THEME VARIABLES — swap one line to change the whole look
+   ========================================================= */
+:root {
+  /* Default: Slate & Amber */
+  --bg:            #1e2430;
+  --surface:       #2a3242;
+  --surface-alt:   #232b3a;
+  --border:        #3a4458;
+  --border-strong: #4b5670;
+  --text:          #e8ecf2;
+  --text-muted:    #9aa6b8;
+  --text-faint:    #6b7688;
+
+  --primary:       #f2b84b;
+  --primary-soft:  #3a3220;
+  --primary-text:  #1e2430;
+
+  --accent:        #6ea8fe;   /* hover / focus / links */
+  --accent-soft:   #24344d;
+
+  --success:       #4ade80;
+  --success-soft:  #1e3a2a;
+  --success-text:  #bbf7d0;
+
+  --danger:        #f87171;
+  --danger-soft:   #3a2124;
+  --danger-text:   #fecaca;
+
+  --warn:          #fbbf24;
+  --warn-soft:     #3a3320;
+  --warn-text:     #fde68a;
+
+  --shadow:        0 1px 4px rgba(0,0,0,0.4);
+  --radius:        8px;
+}
+
+/* =========================================================
+   THEME OVERRIDES — switch via <html data-theme="...">
+   (no data-theme = Slate & Amber, the :root default)
+   ========================================================= */
+[data-theme="dusty-blue"] {
+  --bg:#eef3f9; --surface:#ffffff; --surface-alt:#f5f8fc;
+  --border:#d3dde8; --border-strong:#b6c4d4;
+  --text:#1f2a38; --text-muted:#5a6a7d; --text-faint:#8a97a8;
+  --primary:#3f6fa8; --primary-soft:#e3ecf7; --primary-text:#ffffff;
+  --accent:#2c5a8f; --accent-soft:#dbe7f4;
+  --success:#2e8b57; --success-soft:#d4edda; --success-text:#1b5e20;
+  --danger:#c0392b;  --danger-soft:#ffeaea;  --danger-text:#8a1c1c;
+  --warn:#b8860b;    --warn-soft:#fff3c4;    --warn-text:#6b4a00;
+  --shadow:0 1px 4px rgba(0,0,0,0.10);
+}
+
+[data-theme="soft-sage"] {
+  --bg:#f4f7f2; --surface:#ffffff; --surface-alt:#eef4ec;
+  --border:#d5e0d3; --border-strong:#b8c9b5;
+  --text:#26332b; --text-muted:#5a6b60; --text-faint:#8a998f;
+  --primary:#5c8a6b; --primary-soft:#e3eee6; --primary-text:#ffffff;
+  --accent:#3f6b4d; --accent-soft:#dbe9e0;
+  --success:#2e8b57; --success-soft:#d4edda; --success-text:#1b5e20;
+  --danger:#b3453b;  --danger-soft:#fbe6e3;  --danger-text:#7a221a;
+  --warn:#b8860b;    --warn-soft:#f8efc9;    --warn-text:#6b4a00;
+  --shadow:0 1px 4px rgba(0,0,0,0.10);
+}
+
+[data-theme="warm-sand"] {
+  --bg:#faf6f0; --surface:#ffffff; --surface-alt:#f5efe6;
+  --border:#e3d8c8; --border-strong:#cbbba3;
+  --text:#2b2b2b; --text-muted:#6b6259; --text-faint:#9a9087;
+  --primary:#c96f4a; --primary-soft:#f7e6dd; --primary-text:#ffffff;
+  --accent:#a8552f; --accent-soft:#f2ddd2;
+  --success:#4f8a5b; --success-soft:#e0f0e3; --success-text:#1f4a29;
+  --danger:#c0392b;  --danger-soft:#fbe3e0;  --danger-text:#8a1c1c;
+  --warn:#b8860b;    --warn-soft:#f8efc9;    --warn-text:#6b4a00;
+  --shadow:0 1px 4px rgba(0,0,0,0.10);
+}
+
+[data-theme="plum-blush"] {
+  --bg:#fbf4f7; --surface:#ffffff; --surface-alt:#f6edf2;
+  --border:#e6d3dc; --border-strong:#cdb3c1;
+  --text:#2c2026; --text-muted:#6b5560; --text-faint:#9a8892;
+  --primary:#8e4a6b; --primary-soft:#f2e0e8; --primary-text:#ffffff;
+  --accent:#6f3654; --accent-soft:#ecd6e1;
+  --success:#4f8a5b; --success-soft:#e0f0e3; --success-text:#1f4a29;
+  --danger:#b3453b;  --danger-soft:#fbe3e0;  --danger-text:#7a221a;
+  --warn:#b8860b;    --warn-soft:#f8efc9;    --warn-text:#6b4a00;
+  --shadow:0 1px 4px rgba(0,0,0,0.10);
+}
+
+/* Optional: make the theme change feel smooth */
+body { transition: background-color .25s, color .25s; }
+
+/* =========================================================
+   BASE
+   ========================================================= */
+body { font-family: Arial, sans-serif; margin: 0; padding: 1rem 2rem;
+       background: var(--bg); color: var(--text); }
 header h1 { margin-bottom: 0.2rem; }
-.subtitle { margin-top: 0; color: #555; }
+.subtitle { margin-top: 0; color: var(--text-muted); }
 
 .layout { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 .layout .panel { flex: 1; min-width: 340px; }
-.panel { background: #fff; border-radius: 8px; padding: 1rem 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.15); margin-bottom: 1.5rem; }
+.panel { background: var(--surface); border-radius: var(--radius); padding: 1rem 1.5rem;
+         box-shadow: var(--shadow); margin-bottom: 1.5rem; }
 
+/* =========================================================
+   TABLES
+   ========================================================= */
 table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
-th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: center; }
-th { background: #eef0f4; }
-.row-label { font-weight: bold; background: #f8f8fa; }
-.status { color: #666; font-size: 0.9em; }
+th, td { border: 1px solid var(--border); padding: 0.5rem; text-align: center; }
+th { background: var(--surface-alt); }
+.row-label { font-weight: bold; background: var(--surface-alt); }
+.status { color: var(--text-muted); font-size: 0.9em; }
 
+/* =========================================================
+   PSEUDOCODE / LOG
+   ========================================================= */
 #pseudocode { font-family: "Courier New", monospace; font-size: 0.9em; margin-bottom: 1rem; }
 .line { padding: 0.2rem 0.5rem; border: 2px solid transparent; border-radius: 4px; }
-.line.active { border-color: #d62828; }
+.line.active { border-color: var(--danger); }
 
-#m-box { min-height: 3rem; border: 2px dashed #888; border-radius: 6px; padding: 0.6rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-.placeholder { color: #999; font-style: italic; }
-#log { margin-top: 1rem; padding: 0.6rem; background: #eef6ff; border-radius: 6px; min-height: 1.5rem; }
+#m-box { min-height: 3rem; border: 2px dashed var(--border-strong); border-radius: 6px;
+         padding: 0.6rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.placeholder { color: var(--text-faint); font-style: italic; }
+#log { margin-top: 1rem; padding: 0.6rem; background: var(--accent-soft);
+       border-radius: 6px; min-height: 1.5rem; color: var(--text); }
+#log.error { background: var(--danger-soft); color: var(--danger-text); }
 
-.locked-note { color: #777; font-style: italic; }
+.locked-note { color: var(--text-faint); font-style: italic; }
+
+/* =========================================================
+   BUTTONS / QUIZ
+   ========================================================= */
 #quiz-options { display: flex; flex-direction: column; gap: 0.5rem; max-width: 420px; }
-.quiz-btn { padding: 0.6rem; font-size: 1em; text-align: left; border: 1px solid #aaa; border-radius: 6px; background: #fff; }
-.quiz-btn:disabled { background: #eee; color: #888; }
+.quiz-btn { padding: 0.6rem; font-size: 1em; text-align: left;
+            border: 1px solid var(--border-strong); border-radius: 6px;
+            background: var(--surface); color: var(--text); }
+.quiz-btn:not(:disabled) { cursor: pointer; }
+.quiz-btn:disabled { background: var(--surface-alt); color: var(--text-faint); cursor: default; }
+.quiz-btn:disabled:not(.right) { opacity: 0.5; }
+.quiz-btn.right { background: var(--success-soft); border-color: var(--success); color: var(--success-text); }
+.quiz-btn.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger-text); }
+
+#quiz-feedback { max-width: 600px; min-height: 1.5rem; }
+.quiz-q { margin: 12px 0; }
+.quiz-text { font-weight: bold; margin-bottom: 6px; }
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-why { min-height: 1.2em; margin-top: 4px; }
+.quiz-why.error { color: var(--danger); }
 
 .row-label.clickable { cursor: pointer; }
-.row-label.clickable:hover { background: #dce8ff; }
-tr.current td { background: #fff3c4; }
-#log.error { background: #ffeaea; color: #8a1c1c; }
+.row-label.clickable:hover { background: var(--accent-soft); }
+tr.current td { background: var(--warn-soft); }
 
 .hidden { display: none; }
-#yesno { padding: 0.6rem; background: #fff8e1; border-radius: 6px; margin-top: 0.5rem; }
+#yesno { padding: 0.6rem; background: var(--warn-soft); border-radius: 6px;
+         margin-top: 0.5rem; color: var(--text); }
 #yesno button { margin-left: 0.5rem; padding: 0.3rem 1rem; font-size: 1em; cursor: pointer; }
+
+/* =========================================================
+   PREFERENCES (chips & proposal cells)
+   ========================================================= */
 .pref-cell.clickable { cursor: pointer; }
-.pref-cell.clickable:hover { background: #dce8ff; }
-.pref-cell.proposing { background: #ffd966; font-weight: bold; }
+.pref-cell.clickable:hover { background: var(--accent-soft); }
+.pref-cell.proposing { background: var(--warn); font-weight: bold; color: var(--primary-text); }
+.pref-cell.proposed { color: var(--text-faint); text-decoration: line-through; }
 
-.chip { background: #d4edda; border: 1px solid #7bb68a; border-radius: 14px; padding: 0.25rem 0.7rem; font-weight: bold; }
-.pref-cell.proposed { color: #aaa; text-decoration: line-through; }
+.chip { background: var(--success-soft); border: 1px solid var(--success);
+        border-radius: 14px; padding: 0.25rem 0.7rem; font-weight: bold;
+        color: var(--success-text); }
 
-#btn-done { margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
+/* =========================================================
+   CONTROL BUTTONS
+   ========================================================= */
+#btn-done, #btn-reset, #btn-new {
+  margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: 6px;
+}
+#btn-reset, #btn-new { margin-left: 0.5rem; }
+#btn-done:hover, #btn-reset:hover, #btn-new:hover {
+  border-color: var(--primary); color: var(--primary);
+}
+#problem-label { font-size: 0.7em; font-weight: normal; color: var(--text-muted); margin-left: 0.5rem; }
 
-#btn-reset { margin-left: 0.5rem; margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
-.quiz-btn:not(:disabled) { cursor: pointer; }
-.quiz-btn.right { background: #d4edda; border-color: #2e8b57; color: #1b5e20; }
-.quiz-btn.wrong { background: #ffeaea; border-color: #c0392b; color: #8a1c1c; }
-#quiz-feedback { max-width: 600px; min-height: 1.5rem; }
-
-#btn-new { margin-left: 0.5rem; margin-bottom: 1rem; padding: 0.4rem 1rem; font-size: 1em; cursor: pointer; }
-#problem-label { font-size: 0.7em; font-weight: normal; color: #666; margin-left: 0.5rem; }
-
-/* ---- Recursion tree tool ---- */
-.eq-bar { display: flex; justify-content: space-between; align-items: center; font-size: 1.4em; }
+/* =========================================================
+   RECURSION TREE TOOL
+   ========================================================= */
+.eq-bar { display: flex; justify-content: space-between; align-items: center; font-size: 1.4em;
+          position: sticky; top: 0; z-index: 2; background: var(--surface); }
 .eq-part { padding: 2px 4px; border: 2px solid transparent; border-radius: 4px; }
-.eq-part.active { border-color: #d00; }
+.eq-part.active { border-color: var(--danger); }
 
 .level-head, .level-row {
   display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(90px, 150px);
   align-items: center; gap: 8px;
 }
-.level-head { font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+.level-head { font-weight: bold; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
 .level-row { min-height: 50px; padding: 14px 0; }
 .level-label { font-weight: bold; }
 
 #tree { position: relative; }
-#edges { position: absolute; inset: 0; width: 100%; height: 100%;
-         pointer-events: none; overflow: visible; }
-#rows { position: relative; }   /* paints nodes above the edges */
+#edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+#rows { position: relative; }
 
-.nodes { display: flex; justify-content: space-around; gap: 4px; }
-.nodes { min-width: 0; }
-.node { min-width: 44px; padding: 6px 8px; border: 2px solid #555; border-radius: 16px;
-        background: #fff; text-align: center; white-space: nowrap; }
-.node.empty { border-style: dashed; color: #999; }
-.node.target { border-color: #d00; }
+.nodes { display: flex; justify-content: space-around; gap: 4px; min-width: 0; }
+.node { min-width: 44px; padding: 6px 8px; border: 2px solid var(--border-strong);
+        border-radius: 16px; background: var(--surface); color: var(--text);
+        text-align: center; white-space: nowrap; }
+.node.empty { border-style: dashed; color: var(--text-faint); }
+.node.target { border-color: var(--danger); }
 .node.compact { flex: 1; min-width: 0; padding: 3px 1px; font-size: 0.7em; border-radius: 8px; }
-.nodes.compact { gap: 2px; }   /* ui.js adds this class on the 16-node row */
+.nodes.compact { gap: 2px; }
 
-.level-total { padding: 6px; border: 2px dashed #999; border-radius: 6px; text-align: center; overflow-wrap: anywhere; }
-.level-total.filled { border-style: solid; border-color: #555; }
-.level-total.target { border-color: #d00; }
+.level-total { padding: 6px; border: 2px dashed var(--border-strong); border-radius: 6px;
+               text-align: center; overflow-wrap: anywhere; color: var(--text); }
+.level-total.filled { border-style: solid; border-color: var(--border-strong); }
+.level-total.target { border-color: var(--danger); }
 
-/* Edges "draw" in. Each <line> needs pathLength="1" (ui.js sets it). */
-.edge { stroke: #555; stroke-width: 1.5; fill: none;
+.edge { stroke: var(--border-strong); stroke-width: 1.5; fill: none;
         stroke-dasharray: 1; stroke-dashoffset: 1;
         animation: draw-edge 0.6s ease-out forwards; }
 @keyframes draw-edge { to { stroke-dashoffset: 0; } }
+.edge.static { animation: none; stroke-dashoffset: 0; }
 
 #prompt { font-weight: bold; margin-bottom: 8px; }
 #choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 
-/* Existing edges (redrawn on resize or re-render) appear instantly. */
-.edge.static { animation: none; stroke-dashoffset: 0; }
-
-.quiz-q { margin: 12px 0; }
-.quiz-text { font-weight: bold; margin-bottom: 6px; }
-.quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
-.quiz-why { min-height: 1.2em; margin-top: 4px; }
-.quiz-why.error { color: #d00; }
-.quiz-btn:disabled { cursor: default; }
-.quiz-btn:disabled:not(.right) { opacity: 0.5; }
-
-.eq-bar { position: sticky; top: 0; z-index: 2; background: #fff; }
-
-/* ---- Landing page ---- */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.card { display: block; color: inherit; text-decoration: none; }
-.card h2 { margin-top: 0; }
-.card:hover { outline: 2px solid #d00; }
-.card.disabled { opacity: 0.5; pointer-events: none; }
-.home-link { display: inline-block; margin-bottom: 8px; }
-
-/* ===== Tool 3: complexity (Euler diagram + reduction view) ===== */
+/* =========================================================
+   TOOL 3 — EULER DIAGRAM
+   ========================================================= */
 #euler { display: block; max-width: 640px; margin: 0 auto; }
 
-/* Regions (SVG ellipses/paths). Geometry is set by ui.js */
-.region {
-  fill-opacity: .18;
-  stroke-width: 2;
-  transition: rx .8s, ry .8s, cx .8s, cy .8s, transform .8s, fill-opacity .3s;
-}
+.region { fill-opacity: .18; stroke-width: 2;
+          transition: rx .8s, ry .8s, cx .8s, cy .8s, transform .8s, fill-opacity .3s; }
 .region-p   { fill: #22c55e; stroke: #16a34a; }
 .region-np  { fill: #3b82f6; stroke: #2563eb; }
 .region-nph { fill: #f59e0b; stroke: #d97706; }
 .region-npc { fill: #a855f7; stroke: #7e22ce; fill-opacity: .35; }
-.region.active { stroke: #e11d48; stroke-width: 4; stroke-dasharray: 8 4; fill-opacity: .35; }
+.region.active { stroke: var(--danger); stroke-width: 4; stroke-dasharray: 8 4; fill-opacity: .35; }
 .region.pulse  { animation: region-pulse 1s ease-in-out 2; }
 @keyframes region-pulse { 50% { fill-opacity: .55; } }
 
-.rlabel { font: 600 14px sans-serif; fill: #1f2937; pointer-events: none; }
+/* Keep region colors (they're pedagogical, not theme) but darken labels for dark bg */
+.rlabel { font: 600 14px sans-serif; fill: var(--text); pointer-events: none; }
 .rlabel.small { font-size: 11px; font-weight: 400; }
 
-/* Problem dots */
-.dot { r: 8; fill: #1f2937; stroke: #fff; stroke-width: 2; transition: fill .2s, stroke .2s; }
-.dot.clickable:hover { fill: #374151; stroke: #111827; }
-.dot.active { stroke: #e11d48; stroke-width: 4; }      /* red ring = hint */
-.dot.right  { fill: #16a34a; }
-.dot.wrong  { fill: #e11d48; }
-.dotlabel { font: 12px sans-serif; fill: #111827; pointer-events: none; }
+.dot { r: 8; fill: var(--text); stroke: var(--surface); stroke-width: 2;
+       transition: fill .2s, stroke .2s; }
+.dot.clickable:hover { fill: var(--text-muted); stroke: var(--text); }
+.dot.active { stroke: var(--danger); stroke-width: 4; }
+.dot.right  { fill: var(--success); }
+.dot.wrong  { fill: var(--danger); }
+.dotlabel { font: 12px sans-serif; fill: var(--text); pointer-events: none; }
 
-/* Reduction view: [A] ---> [B] with a travelling pulse */
+/* =========================================================
+   TOOL 3 — REDUCTION VIEW
+   ========================================================= */
 #reduce { padding: 8px 0; }
 .rrow { display: flex; align-items: center; gap: 12px; }
-.rcard {
-  flex: 0 0 auto; min-width: 120px; padding: 10px 12px;
-  border: 2px solid #9ca3af; border-radius: 8px; background: #fff; text-align: center;
-}
-.rcard  { flex: 0 1 150px; min-width: 0; overflow-wrap: anywhere; }
-.rcard small { display: block; color: #6b7280; }
-.rcard.hard { border-color: #d97706; background: #fffbeb; }   /* hardness lands here */
-.rcard.easy { border-color: #16a34a; background: #f0fdf4; }
-.rcard.clickable:hover { box-shadow: 0 0 0 3px #bfdbfe; }
-.rcard.active { outline: 3px solid #e11d48; outline-offset: 2px; }
+.rcard { flex: 0 1 150px; min-width: 0; padding: 10px 12px;
+         border: 2px solid var(--border-strong); border-radius: 8px;
+         background: var(--surface); text-align: center; overflow-wrap: anywhere;
+         color: var(--text); }
+.rcard small { display: block; color: var(--text-muted); }
+.rcard.hard { border-color: var(--warn); background: var(--warn-soft); }
+.rcard.easy { border-color: var(--success); background: var(--success-soft); }
+.rcard.clickable:hover { box-shadow: 0 0 0 3px var(--accent-soft); }
+.rcard.active { outline: 3px solid var(--danger); outline-offset: 2px; }
 
-.rtrack { position: relative; flex: 1 1 auto; height: 28px; }
-.rtrack { flex: 1 1 80px; min-width: 80px; }
-.rtrack::before {                                   /* the arrow shaft */
-  content: ""; position: absolute; left: 0; right: 10px; top: 50%;
-  border-top: 3px solid #4b5563;
-}
-.rtrack::after {                                    /* the arrow head */
-  content: ""; position: absolute; right: 0; top: 50%; margin-top: -7px;
-  border-left: 12px solid #4b5563; border-top: 7px solid transparent; border-bottom: 7px solid transparent;
-}
-/* Arrow pointing B -> A, drawn explicitly (no mirroring) */
+.rtrack { position: relative; flex: 1 1 80px; min-width: 80px; height: 28px; }
+.rtrack::before { content: ""; position: absolute; left: 0; right: 10px; top: 50%;
+                  border-top: 3px solid var(--border-strong); }
+.rtrack::after  { content: ""; position: absolute; right: 0; top: 50%; margin-top: -7px;
+                  border-left: 12px solid var(--border-strong);
+                  border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
 .rtrack.rev::before { left: 10px; right: 0; }
-.rtrack.rev::after  { left: 0; right: auto; border-left: 0; border-right: 12px solid #4b5563; }
+.rtrack.rev::after  { left: 0; right: auto; border-left: 0;
+                      border-right: 12px solid var(--border-strong); }
 .rtrack.rev .rpulse { left: auto; right: 0; }
+
+.rpulse { position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin-top: -8px;
+          border-radius: 50%; background: var(--warn); opacity: 0; }
+.rpulse.go        { animation: rpulse-go 1.2s ease-in forwards; }
+.rpulse.blocked   { animation: rpulse-block 1.2s ease-in forwards; }
+.rpulse.blockedback { animation: rpulse-blockback 1.2s ease-in forwards; }
 .rtrack.rev .rpulse.go        { animation: rpulse-go-rev 1.2s ease-in forwards; }
 .rtrack.rev .rpulse.blockedback { animation: rpulse-blockback-rev 1.2s ease-in forwards; }
-@keyframes rpulse-go-rev {
-  0%   { right: 0; opacity: 1; }
-  100% { right: calc(100% - 16px); opacity: 1; }
-}
-@keyframes rpulse-blockback-rev {
-  0%   { right: calc(100% - 16px); opacity: 1; }
-  60%  { right: 50%; opacity: 1; }
-  100% { right: 50%; opacity: 0; }
-}
-.rpulse {
-  position: absolute; top: 50%; left: 0; width: 16px; height: 16px; margin-top: -8px;
-  border-radius: 50%; background: #f59e0b; opacity: 0;
-}
-.rpulse.go      { animation: rpulse-go 1.2s ease-in forwards; }
-.rpulse.blocked { animation: rpulse-block 1.2s ease-in forwards; }
-@keyframes rpulse-go    { 0% { left: 0; opacity: 1; } 100% { left: calc(100% - 16px); opacity: 1; } }
-@keyframes rpulse-block { 0% { left: 0; opacity: 1; } 60% { left: 50%; opacity: 1; } 100% { left: 50%; opacity: 0; } }
 
-/* Tool 3: blocked pulse that starts at the arrowhead (hardness cannot flow backwards) */
-.rpulse.blockedback { animation: rpulse-blockback 1.2s ease-in forwards; }
-@keyframes rpulse-blockback {
-  0%   { left: calc(100% - 16px); opacity: 1; }
-  60%  { left: 50%; opacity: 1; }
-  100% { left: 50%; opacity: 0; }
-}
+@keyframes rpulse-go         { 0%{left:0;opacity:1;} 100%{left:calc(100% - 16px);opacity:1;} }
+@keyframes rpulse-block      { 0%{left:0;opacity:1;} 60%{left:50%;opacity:1;} 100%{left:50%;opacity:0;} }
+@keyframes rpulse-blockback  { 0%{left:calc(100% - 16px);opacity:1;} 60%{left:50%;opacity:1;} 100%{left:50%;opacity:0;} }
+@keyframes rpulse-go-rev     { 0%{right:0;opacity:1;} 100%{right:calc(100% - 16px);opacity:1;} }
+@keyframes rpulse-blockback-rev { 0%{right:calc(100% - 16px);opacity:1;} 60%{right:50%;opacity:1;} 100%{right:50%;opacity:0;} }
 
-/* Tool 3: statement banner (scoped to #statement, so the recursion tool is unaffected) */
+/* =========================================================
+   TOOL 3 — STATEMENT BANNER
+   ========================================================= */
 #statement {
   max-width: 900px; margin: 8px auto 12px; padding: 10px 16px;
-  background: #f1f5f9; border: 1px solid #cbd5e1; border-left: 6px solid #2563eb;
-  border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+  background: var(--accent-soft); border: 1px solid var(--border);
+  border-left: 6px solid var(--accent); border-radius: 8px;
+  box-shadow: var(--shadow); color: var(--text);
 }
-#statement[data-world="eq"] { background: #fffbeb; border-color: #fcd34d; border-left-color: #d97706; }
-#statement > div:first-child { font-size: 13px; color: #475569; margin-bottom: 4px; }
-#statement > div:last-child  { font-size: 20px; line-height: 1.5; color: #111827; }
+#statement[data-world="eq"] {
+  background: var(--warn-soft); border-color: var(--warn); border-left-color: var(--warn);
+}
+#statement > div:first-child { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+#statement > div:last-child  { font-size: 20px; line-height: 1.5; color: var(--text); }
 #statement .eq-part { padding: 1px 5px; border-radius: 4px; font-weight: 600; }
+
+/* =========================================================
+   LANDING PAGE CARDS
+   ========================================================= */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.card { display: block; color: inherit; text-decoration: none;
+        background: var(--surface); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 1rem 1.5rem; }
+.card h2 { margin-top: 0; }
+.card:hover { outline: 2px solid var(--primary); }
+.card.disabled { opacity: 0.5; pointer-events: none; }
+.home-link { display: inline-block; margin-bottom: 8px; color: var(--accent); }
+
+#theme-switcher {
+  position: fixed; top: 12px; right: 12px; z-index: 100;
+  padding: 6px 10px; font-size: 14px; cursor: pointer;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  box-shadow: var(--shadow);
+}

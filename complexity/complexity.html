@@ -6,6 +6,40 @@
 <title>P / NP / NP-Complete / NP-hard</title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
+
+<select id="theme-switcher" aria-label="Choose theme">
+  <option value="">Slate &amp; Amber (dark)</option>
+  <option value="dusty-blue">Dusty Blue</option>
+  <option value="soft-sage">Soft Sage</option>
+  <option value="warm-sand">Warm Sand</option>
+  <option value="plum-blush">Plum &amp; Blush</option>
+</select>
+
+<script>
+(function () {
+  var KEY = 'dsa-theme';
+  var sel = document.getElementById('theme-switcher');
+  var html = document.documentElement;
+
+  function apply(theme) {
+    if (theme) html.setAttribute('data-theme', theme);
+    else       html.removeAttribute('data-theme');
+    if (sel) sel.value = theme || '';
+  }
+
+  // Load saved theme as early as possible
+  apply(localStorage.getItem(KEY) || '');
+
+  if (sel) {
+    sel.addEventListener('change', function () {
+      var theme = sel.value;
+      localStorage.setItem(KEY, theme);
+      apply(theme);
+    });
+  }
+})();
+</script>
+
 <body>
 <a class="home-link" href="../index.html">← Home</a>
 <h1>P / NP / NP-Complete / NP-hard</h1>
