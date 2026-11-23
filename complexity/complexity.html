@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P / NP / NP-Complete / NP-hard</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a class="home-link" href="../index.html">← Home</a>
+<h1>P / NP / NP-Complete / NP-hard</h1>
+
+<!-- Sticky statement; deciding phrases become .eq-part spans -->
+<div class="eq-bar" id="statement"></div>
+
+<div class="layout">
+  <div class="panel">
+    <div id="prompt"></div>
+    <svg id="euler" viewBox="0 0 600 400" width="100%"
+         role="img" aria-label="Euler diagram of P, NP, NP-hard"></svg>
+    <div id="reduce" class="hidden"></div>
+  </div>
+
+  <div class="panel">
+    <div id="choices"></div>
+    <div id="log"></div>
+    <div id="controls">
+      <button id="btn-reset" type="button">Reset</button>
+      <button id="btn-new" type="button">New problem</button>
+      <button id="btn-quiz" type="button">Take the quiz</button>
+    </div>
+  </div>
+</div>
+
+<div id="quiz" class="panel hidden"></div>
+
+<script src="data.js"></script>
+<script src="ui.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>

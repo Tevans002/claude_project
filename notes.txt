@@ -12,39 +12,81 @@ Gale-Shapley(preference lists for n hospitals and n students)
                 Do nothing
     Return M
 
-I'm building a plain HTML/CSS/JS study tool for my DSA midterm. No build step,
-no modules (plain <script> tags), opened directly from disk. Code is delivered
-in small pieces, one function or file at a time, because long replies get cut off.
-Each stage ends with browser tests I run before moving on.
+I'm building a plain HTML/CSS/JS study tool for my DSA midterm. Please keep replies
+concise and deliver code in small pieces (one function or file per reply) because long
+replies get cut off. End each stage with browser tests I run before moving on.
+Discuss the design before writing any code.
 
-Sections (4 pages, landing page index.html built last):
-1. Stable Matching (DONE)
-2. Algorithm Analysis
-3. Recursion
-4. Backtracking + 1D Dynamic Programming
+## Project rules
+- No build step, no modules: plain <script> tags, opened directly from disk.
+- Every HTML page needs <meta charset="utf-8"> because the data uses ³ ℓ Θ ≠ etc.
+- Layout per tool: data.js (hand-verified data plus an RT.selfCheck()-style console
+  check), ui.js (rendering only, as an IIFE `var UI = ...`; later parts extend it with
+  `(function(U){...})(UI)`), game.js (state machine as `var Game = ...` exposing
+  `Game.state`, extended the same way).
+- Interaction pattern: the user advances by clicking the correct choice. A wrong click
+  shows a short "why" in #log.error and puts a red box (.active) on the part of the
+  prompt/equation that guides the answer. Correct answers trigger ~1s pauses with clicks
+  blocked (S.busy + setTimeout, cleared on Reset). Event delegation is on containers.
+  Choices are shuffled at render, with the original index kept in data-i. Data format:
+  R(text) = correct, W(text, why) = wrong. Each tool has a Reset button, a
+  "New problem" button (cycles presets), and a quiz at the end.
 
-Folder structure:
+## Folder structure (current)
 project/
-  css/style.css            (shared styles)
-  stable-matching/
-    stable-matching.html
-    data.js    (PROBLEMS list: prefs + hand-verified quiz per problem)
-    engine.js  (algorithm logic only, no DOM)
-    ui.js      (rendering: tables, pseudocode, quiz)
-    game.js    (interaction state machine, clicks, feedback)
+  index.html                  landing page: cards for tools 1-2; card 3 is a
+                              disabled "Coming soon" placeholder
+  css/style.css               shared styles
+  stable-matching/            DONE (stable-matching.html, data.js, engine.js, ui.js, game.js)
+  recursion/                  DONE (recursion.html, data.js, ui.js, game.js)
+Each tool page starts with <a class="home-link" href="../index.html">← Home</a>.
 
-Stable Matching tool design (pattern to reuse):
-- Preference tables on the left, pseudocode on the right with a red box on the
-  current line, M box showing the matching, and a log line for feedback.
-- The user advances by clicking the correct item in the table. Yes/No buttons
-  handle decisions. Wrong clicks show a short explanation of why.
-- Automatic steps animate with ~1s pauses. Clicks are blocked meanwhile.
-- A multiple-choice quiz unlocks at the end with distractors that teach a
-  specific mistake. Reset and "New problem" (cycles presets) buttons.
-- Click handlers are attached to the tables (event delegation) so they survive
-  re-rendering.
+## Existing shared CSS classes
+.panel .layout .line.active (red box) .chip .clickable .hidden
+.quiz-btn (.right / .wrong / :disabled dims) .quiz-q .quiz-text .quiz-opts .quiz-why(.error)
+#log.error, .eq-bar (sticky) .eq-part.active (red box), #prompt, #choices
+.edge (SVG line, pathLength="1", stroke-dash draw-in animation), .edge.static
+.cards .card .card.disabled .home-link
 
-Shared CSS classes I already have: .panel, .layout, .line.active (red box),
-.chip, .clickable, .hidden, .quiz-btn (.right/.wrong), #log.error.
+## Tool 3 (NEXT): P / NP / NP-Complete / NP-hard
+Folder: project/complexity/ (complexity.html, data.js, ui.js, game.js).
+When it's done, update index.html card 3 to link to it.
 
-Next step: plan the Algorithm Analysis tool. Discuss the design first, no code yet.
+Exam question: "True or False. Assume P ≠ NP."
+(a) Every problem in NP is also in P.                                  F
+(b) Every problem in P is also in NP.                                  T
+(c) NP is the set of problems that cannot be solved in poly time.      F
+(d) If A is NP-Complete, then A is in NP.                              T
+(e) If A is NP-Complete, then A is in P.                               F
+(f) If A is in NP, there is a poly-time verifier for yes instances.    T
+(g) Poly reduction from A to NP-hard B => A is NP-hard.                F
+(h) Poly reduction from NP-hard A to B => B is NP-hard.                T
+
+Agreed design (two ideas only):
+1. Animated Euler diagram: P inside NP; NP-hard overlaps NP's edge; NP-Complete is the
+   overlap. Problems appear as dots. For each statement the user picks T/F, then
+   "proves" it: for False, click a counterexample dot; for True, the deciding region
+   highlights. A wrong answer red-boxes the deciding phrase in the statement
+   (e.g. "cannot be solved", "from A to B").
+2. Reduction arrow animation (for g/h-style statements): two problem cards with arrow
+   A → B. A "hardness" pulse travels from the hard problem along the arrow to B.
+   Counterexample for (g): Sorting → SAT is a valid reduction, but Sorting is easy.
+Goal: reinforce HOW to answer each exam statement, not just memorize T/F.
+
+Course example problems: Clique, Vertex Cover, Independent Set, SAT (all NP-Complete).
+Reductions to show: Clique ≤ Independent Set, Independent Set ≤ Vertex Cover,
+SAT/3-SAT ≤ Independent Set.
+
+Variants for "New problem": reworded versions of the same 8 traps (e.g. "from B to A",
+"NP-hard problems are in NP"), including some that assume P = NP. Under P = NP the
+diagram collapses (P = NP = NP-Complete region inside NP-hard). Answers change:
+(a) T, (e) T, and (b) (c) (d) (f) (h) are unchanged. (g) stays F but is subtle
+(trivial problems are never NP-hard), so be careful or skip it.
+
+## Open questions to settle first
+1. The course list has no P problem or non-NP NP-hard problem. Is it OK to use
+   Sorting / Shortest Path as P dots and the Halting Problem as NP-hard-but-not-in-NP?
+2. Diagram: SVG (animatable regions) vs CSS circles. I lean SVG.
+3. Should the P = NP version show both diagrams side by side or toggle?
+
+Please start with a short design summary and the stage plan, no code yet.
